@@ -259,15 +259,10 @@ public class CustomRulesDialog extends BaseDialog{
             }
 
             t.button("@rules.anyenv", style, () -> {
-                if(!rules.infiniteResources){
-                    //unlocalized for now
-                    ui.showInfo("The 'any' environment can only be used in sandbox mode.");
-                }else{
-                    rules.env = Vars.defaultEnv;
-                    rules.hiddenBuildItems.clear();
-                    rules.planet = Planets.sun;
-                }
-            }).group(group).checked(b -> rules.planet == Planets.sun);
+                rules.env = Vars.defaultEnv;	                //unlocalized for now
+                rules.hiddenBuildItems.clear();	                
+                ui.showInfo("[accent]'Any' environment, or 'mixed tech', is no longer allowed in non-sandbox mode.[]\n\nReasoning: Serpulo and Erekir tech were never meant to be used in the same map. They are not compatible.\nI have received far too many complains in this regard.");
+            }).group(group).checked(rules.hiddenBuildItems.size == 0);
         }).left().fill(false).expand(false, false).row();
 
         title("@rules.title.teams");
